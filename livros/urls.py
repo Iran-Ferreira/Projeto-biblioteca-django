@@ -4,7 +4,8 @@ from .views import (
     detalhe_livro,
     criar_livro,
     atualizar_livro,
-    deletar_livro
+    deletar_livro,
+    rota_protegida
 )
 urlpatterns = [
     path('livros/', lista_livros),
@@ -13,4 +14,5 @@ urlpatterns = [
     path('livros/criar/', criar_livro),
     path('livros/<int:id>/atualizar/', atualizar_livro),
     path('livros/<int:id>/deletar/', deletar_livro),
+    path('protegida/', rota_protegida),
 ]
