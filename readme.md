@@ -47,10 +47,10 @@ http://127.0.0.1:8000/
 ```
 
 ## Atualizações no código: 
-JWT (JSON Web Token) para autenticação baseada em tokens.
-Cadastro de usuários (ex.: clientes, administradores).
-Login (geração de token JWT).
-Proteção de rotas (permitir acesso apenas para usuários autenticados).
+- JWT (JSON Web Token) para autenticação baseada em tokens.
+- Cadastro de usuários (ex.: clientes, administradores).
+- Login (geração de token JWT).
+- Proteção de rotas (permitir acesso apenas para usuários autenticados).
 
 
 Listar livros (dados estáticos)
@@ -69,9 +69,11 @@ Criar livros
     http://127.0.0.1:8000/api/livros/criar/
 
 Deletar livros
+
     Endpoint: DELETE api/livros/1/deletar/
     http://127.0.0.1:8000/api/livros/1/deletar/
 
 Atualizar livros
+
     Endpoint: PUT api/livros/1/atualizar/
     http://127.0.0.1:8000/api/livros/1/atualizar/
