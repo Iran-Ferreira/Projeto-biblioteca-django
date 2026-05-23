@@ -15,4 +15,4 @@ media/
 
 # Variáveis de ambiente
 .biblioteca/
-    
+.env
