@@ -52,6 +52,7 @@ http://127.0.0.1:8000/
 - Login (geração de token JWT).
 - Proteção de rotas (permitir acesso apenas para usuários autenticados).
 
+## Rotas para testar o projeto localmente
 
 Listar livros (dados estáticos)
 
@@ -61,19 +62,59 @@ Listar livros (dados estáticos)
 Listar livro único
 
     Endpoint: GET /api/livros/1/
-    http://127.0.0.1:8000/api/livros/1/
+    URL completa: http://127.0.0.1:8000/api/livros/1/
 
 Criar livros
 
     Endpoint: POST api/livros/criar/
-    http://127.0.0.1:8000/api/livros/criar/
+    URL completa: http://127.0.0.1:8000/api/livros/criar/
 
 Deletar livros
 
-    Endpoint: DELETE api/livros/1/deletar/
-    http://127.0.0.1:8000/api/livros/1/deletar/
+    Endpoint: DELETE api/livros/1 deletar/
+    URL completa: http://127.0.0.1:8000/api/livros/1/deletar/
 
 Atualizar livros
 
     Endpoint: PUT api/livros/1/atualizar/
-    http://127.0.0.1:8000/api/livros/1/atualizar/
+    URL completa: http://127.0.0.1:8000/api/livros/1/atualizar/
+
+
+## Rotas para testar o projeto no render
+
+Listar livros
+
+    Endpoint: GET /api/livros/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/livros/
+
+Listar livro único
+
+    Endpoint: GET /api/livros/1/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/livros/1/
+
+Criar usuários
+
+    Endpoint: POST api/usuarios/cadastro/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/usuarios/cadastro/
+    
+    
+Criar token JWT
+
+    Endpoint: POST api/token/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/token/
+
+
+Criar livros
+
+    Endpoint: POST api/livros/criar/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/livros/criar/
+
+Deletar livros
+
+    Endpoint: DELETE api/livros/1/deletar/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/livros/3/deletar/
+
+Atualizar livros
+
+    Endpoint: PUT api/livros/1/atualizar/
+    URL completa: https://projeto-biblioteca-django-4ko3.onrender.com/api/livros/1/atualizar/
