@@ -2,6 +2,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
+from rest_framework import status
+
+from .models import Livro
+from .serializers import LivroSerializer
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -12,66 +16,94 @@ def rota_protegida(request):
     })
 
 # Create your views here.
-livros = [
-    {"id": 1, "titulo": "Dom Casmurro", "autor": "Machado de Assis"},
-    {"id": 2, "titulo": "1984", "autor": "George Orwell"},
-    {"id": 3, "titulo": "O Hobbit", "autor": "J.R.R. Tolkien"},
-]
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def lista_livros(request):
-    return Response(livros)
+    livros = Livro.objects.all()
+    serializer = LivroSerializer(
+        livros,
+        many=True
+    )
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def detalhe_livro(request, id):
-    
-    for livro in livros:
-        if livro["id"] == id:
-            return Response(livro)
-    
-    return Response({"erro": "Livro não encontrado"}, status=404)
+def detalhe_livro(request, id): 
+    try: 
+        livro = Livro.objects.get(id=id)
+        
+        serializer = LivroSerializer(livro)
 
+        return Response(serializer.data)
+    except Livro.DoesNotExist:
+        return Response(
+            {"erro:" "Livro não encontrado"},
+            status=status.HTTP_404_NOT_FOUND
+        )
 #criação de livros
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def criar_livro(request):
-
-    novo_livro = {
-        "id": len(livros) + 1,
-        "titulo": request.data.get("titulo"),
-        "autor": request.data.get("autor"),
-    }
-
-    livros.append(novo_livro)
-
-    return Response(novo_livro, status=201)
+    serializer = LivroSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )
     
 #Atualizar livros
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def atualizar_livro(request, id):
+    try: 
+        livro = Livro.objects.get(id=id)
 
-    for livro in livros:
-        if livro["id"] == id:
-            livro["titulo"] = request.data.get("titulo", livro["titulo"])
-            livro["autor"] = request.data.get("autor", livro["autor"])
-
-            return Response(livro)
-
-    return Response({"erro": "Livro não encontrado"}, status=404)
+    except Livro.DoesNotExist:
+        return Response(
+            {"erro:" "Livro não encontrado"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    serializer = LivroSerializer(
+        livro,
+        data=request.data,
+        partial=True
+    )
+    
+    if serializer.is_valid():
+        serializer.save()
+        
+        return Response(serializer.data)
+    
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )
  
 #Excluir livros
 @api_view(['DELETE']) 
 @permission_classes([IsAuthenticated]) 
 def deletar_livro(request, id):
-    global livros
-
-    livros = [
-        livro for livro in livros 
-            if livro["id"] != id
-        ]
-
-    return Response({"mensagem": "Livro removido com sucesso"})
+    try:
+        livro = Livro.objects.get(id=id)
+    
+    except Livro.DoesNotExist:
+        return Response(
+            {"erro:" "Livro não encontrado"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    livro.delete()
+    
+    return Response({
+        "Mensagem:" "Livro removido com sucesso."
+    })
