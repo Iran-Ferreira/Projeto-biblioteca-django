@@ -9,7 +9,6 @@ from .views import (
 )
 urlpatterns = [
     path('livros/', lista_livros),
-    path('livros/', lista_livros),
     path('livros/<int:id>/', detalhe_livro),
     path('livros/criar/', criar_livro),
     path('livros/<int:id>/atualizar/', atualizar_livro),

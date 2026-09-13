@@ -39,7 +39,7 @@ def detalhe_livro(request, id):
         return Response(serializer.data)
     except Livro.DoesNotExist:
         return Response(
-            {"erro:" "Livro não encontrado"},
+            {"erro": "Livro não encontrado"},
             status=status.HTTP_404_NOT_FOUND
         )
 #criação de livros
@@ -69,7 +69,7 @@ def atualizar_livro(request, id):
 
     except Livro.DoesNotExist:
         return Response(
-            {"erro:" "Livro não encontrado"},
+            {"erro": "Livro não encontrado"},
             status=status.HTTP_404_NOT_FOUND
         )
     
@@ -98,12 +98,12 @@ def deletar_livro(request, id):
     
     except Livro.DoesNotExist:
         return Response(
-            {"erro:" "Livro não encontrado"},
+            {"erro": "Livro não encontrado"},
             status=status.HTTP_404_NOT_FOUND
         )
     
     livro.delete()
     
     return Response({
-        "Mensagem:" "Livro removido com sucesso."
+        "mensagem": "Livro removido com sucesso."
     })
