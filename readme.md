@@ -53,6 +53,17 @@ Para usar a API publicada, altere o `.env`:
 VITE_API_URL=https://projeto-biblioteca-django-4ko3.onrender.com/api
 ```
 
+## Deploy no Render
+
+Crie um Web Service apontando para a raiz do repositorio e use:
+
+- Build Command: `bash build.sh`
+- Start Command: `gunicorn biblioteca.wsgi:application --bind 0.0.0.0:$PORT`
+
+Configure no ambiente do Render `SECRET_KEY`, `DATABASE_URL` e `DEBUG=False`. O
+`build.sh` compila o frontend e o Django serve o resultado na rota `/`; por
+isso, no mesmo servico, `VITE_API_URL` pode ficar vazio ou usar `/api`.
+
 ## Funcionalidades
 
 - Login e cadastro de usuarios com JWT.
