@@ -46,11 +46,6 @@ INSTALLED_APPS = [
 
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'frontend' / 'dist']
-
-
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -134,6 +129,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/assets/'
+
+STATICFILES_DIRS = [BASE_DIR / 'frontend' / 'dist' / 'assets']
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Habilita compressão e suporte a cache pelo WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
