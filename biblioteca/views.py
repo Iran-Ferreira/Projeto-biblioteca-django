@@ -1,6 +1,4 @@
-from django.http import JsonResponse
+from django.shortcuts import render
 
 def home(request):
-    return JsonResponse({
-        "mensagem": "API Biblioteca Online funcionando"
-    })
+    return render(request, 'index.html')
